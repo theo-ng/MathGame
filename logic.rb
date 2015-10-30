@@ -13,7 +13,7 @@ def kill_player
 end
 
 def give_points
-  score = 10 - (@end - @start)
+  score = MAX - (@end - @start)
   case @turn
   when 1 then @p1_score += score.round
   when 2 then @p2_score += score.round
@@ -21,11 +21,7 @@ def give_points
 end
 
 def update(reply)
-  if correct?(reply)
-    give_points
-  else
-    kill_player
-  end
+  correct?(reply) ? give_points : kill_player
 end
 
 def correct?(ans)
@@ -53,14 +49,18 @@ def set_dead
   set_winner(@dead)
 end
 
+def tie?
+  @p2_score == @p1_score
+end
+
 def set_winner(dead_player)
-  if @p2_score == @p1_score
-    if @dead == @p1_name
-      @winner = @p2_name
-    else
-      @winner = @p1_name
-    end
+  if tie? && @dead == @p1_name
+    @winner = @p2_name
+  elsif tie? && @dead == @p2_name
+    @winner = @p1_name
+  elsif @p2_score > @p1_score
+    @winner = @p2_name
   else
-    @winner = @p2_score > @p1_score ? @p2_name : @p1_name
+    @winner = @p1_name
   end
 end
