@@ -1,0 +1,2 @@
+class EmptyNameError < StandardError
+end

@@ -8,16 +8,11 @@ class UI
     puts info
   end
 
-  def get_names
-    names = []
-
-    puts "Enter name of Player 1."
-    names << gets.chomp[0,7].upcase
-
-    puts "Enter name of Player 2."
-    names << gets.chomp[0,7].upcase
-    
-    names
+  def get_name
+    puts "Enter name of Player."
+    name = gets.chomp[0,7].upcase
+    raise EmptyNameError, "You have not entered a name" if name.empty?
+    name
   end
 
   def ask_question(question)
@@ -25,7 +20,9 @@ class UI
   end
 
   def get_reply
-    reply = gets.chomp.to_i
+    reply = gets.chomp
+    raise InvalidGuessError, "Invalid Response, please use numbers only" unless reply =~ /\d+/
+    reply = reply.to_i
   end
 
   def display_score(player1, player2)

@@ -2,12 +2,12 @@ class State
 
   attr_reader :turn
   attr_reader :on
-  attr_accessor :start
-  attr_accessor :end
+  attr_reader :start
+  attr_reader :end
   alias :on? :on
 
   def initialize
-    @turn = 1
+    @turn = 0
     @on = true
     @start = Time.now
     @end = Time.now
@@ -22,10 +22,11 @@ class State
   end
 
   def switch_turn
-    case @turn
-    when 1 then @turn = 2
-    when 2 then @turn = 1
-    end
+    @turn = (@turn == 0) ? 1 : 0
+    # case @turn
+    # when 1 then @turn = 2
+    # when 2 then @turn = 1
+    # end
   end
 
   def off

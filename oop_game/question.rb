@@ -1,6 +1,6 @@
 class Question
 
-  attr_accessor :num1
+  attr_accessor :num1, 
   attr_accessor :num2
   attr_accessor :operator
   attr_accessor :answer
@@ -15,7 +15,7 @@ class Question
     self.answer = num1.send(OP_TYPE[operator], num2)
   end
 
-  def to_s(player)
+  def format(player)
     "#{player.name}: What does #{num1} #{OP_TYPE[operator]} #{num2} equal?"
   end
 end
