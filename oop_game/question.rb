@@ -1,6 +1,6 @@
 class Question
 
-  attr_accessor :num1, 
+  attr_accessor :num1
   attr_accessor :num2
   attr_accessor :operator
   attr_accessor :answer
